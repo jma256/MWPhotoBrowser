@@ -852,10 +852,11 @@
             MWZoomingScrollView *page = [self dequeueRecycledPage];
             if (!page) {
                 page = [[MWZoomingScrollView alloc] initWithPhotoBrowser:self];
+                page.backgroundColor = [UIColor clearColor];
             }
             [_visiblePages addObject:page];
             [self configurePage:page forIndex:index];
-
+            
             [_pagingScrollView addSubview:page];
             MWLog(@"Added page at index %lu", (unsigned long)index);
             

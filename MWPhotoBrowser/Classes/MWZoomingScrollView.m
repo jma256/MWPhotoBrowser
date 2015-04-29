@@ -35,22 +35,22 @@
         _index = NSUIntegerMax;
         _photoBrowser = browser;
         
-		// Tap view for background
-		_tapView = [[MWTapDetectingView alloc] initWithFrame:self.bounds];
-		_tapView.tapDelegate = self;
-		_tapView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-		_tapView.backgroundColor = [UIColor blackColor];
-		[self addSubview:_tapView];
-		
-		// Image view
-		_photoImageView = [[MWTapDetectingImageView alloc] initWithFrame:CGRectZero];
-		_photoImageView.tapDelegate = self;
-		_photoImageView.contentMode = UIViewContentModeCenter;
-		_photoImageView.backgroundColor = [UIColor blackColor];
-		[self addSubview:_photoImageView];
-		
-		// Loading indicator
-		_loadingIndicator = [[DACircularProgressView alloc] initWithFrame:CGRectMake(140.0f, 30.0f, 40.0f, 40.0f)];
+        // Tap view for background
+        _tapView = [[MWTapDetectingView alloc] initWithFrame:self.bounds];
+        _tapView.tapDelegate = self;
+        _tapView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        _tapView.backgroundColor = [UIColor blackColor];
+        [self addSubview:_tapView];
+        
+        // Image view
+        _photoImageView = [[MWTapDetectingImageView alloc] initWithFrame:CGRectZero];
+        _photoImageView.tapDelegate = self;
+        _photoImageView.contentMode = UIViewContentModeCenter;
+        _photoImageView.backgroundColor = [UIColor blackColor];
+        [self addSubview:_photoImageView];
+        
+        // Loading indicator
+        _loadingIndicator = [[DACircularProgressView alloc] initWithFrame:CGRectMake(140.0f, 30.0f, 40.0f, 40.0f)];
         _loadingIndicator.userInteractionEnabled = NO;
         if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7")) {
             _loadingIndicator.thicknessRatio = 0.1;
@@ -59,9 +59,9 @@
             _loadingIndicator.thicknessRatio = 0.2;
             _loadingIndicator.roundedCorners = YES;
         }
-		_loadingIndicator.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin |
+        _loadingIndicator.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin |
         UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin;
-		[self addSubview:_loadingIndicator];
+        [self addSubview:_loadingIndicator];
 
         // Listen progress notifications
         [[NSNotificationCenter defaultCenter] addObserver:self
@@ -69,16 +69,23 @@
                                                      name:MWPHOTO_PROGRESS_NOTIFICATION
                                                    object:nil];
         
-		// Setup
-		self.backgroundColor = [UIColor blackColor];
-		self.delegate = self;
-		self.showsHorizontalScrollIndicator = NO;
-		self.showsVerticalScrollIndicator = NO;
-		self.decelerationRate = UIScrollViewDecelerationRateFast;
-		self.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        // Setup
+        self.backgroundColor = [UIColor blackColor];
+        self.delegate = self;
+        self.showsHorizontalScrollIndicator = NO;
+        self.showsVerticalScrollIndicator = NO;
+        self.decelerationRate = UIScrollViewDecelerationRateFast;
+        self.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         
     }
     return self;
+}
+
+- (void)setBackgroundColor:(UIColor *)backgroundColor
+{
+    [super setBackgroundColor:backgroundColor];
+    _tapView.backgroundColor = backgroundColor;
+    _photoImageView.backgroundColor = backgroundColor;
 }
 
 - (void)dealloc {
